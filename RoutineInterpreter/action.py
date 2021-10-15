@@ -2,3 +2,6 @@
 
 def Flow(status):
   return True
+
+def Finalize():
+  Flow(False)
