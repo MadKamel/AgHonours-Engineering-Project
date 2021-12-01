@@ -13,7 +13,8 @@ try:
                 elif SplitCommand[0] == "":
                         continue
                 else:
-                        print("[#] LINE: " + RoutineList[i])
+                        if cfg["debug"] == "yes":
+                                print("[#] LINE: " + RoutineList[i])
                         if SplitCommand[0] == "NOTE":
                                 print("[@] NOTE: " + " ".join(SplitCommand[1:]))
                         elif SplitCommand[0] == "WAIT":
