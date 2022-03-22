@@ -210,3 +210,19 @@ These now work :DD
 [i] INFO: ROUTINE FINISHED.
 
 
+[!] INFO: ROUTINE STARTED AT Mon Mar 21 19:51:01 2022
+[#] LINE: NOTE Starting routine...
+[@] NOTE: Starting routine...
+[#] LINE: FLOW ON
+[i] INFO: ATTEMPTING TO BEGIN FLOW
+[i] INFO: FLOW NOW ACTIVE
+[#] LINE: WAIT 1
+[#] LINE: FLOW OFF
+[i] INFO: ATTEMPTING TO STOP FLOW
+[i] INFO: FLOW NOW INACTIVE
+[#] LINE: NOTE Ending routine...
+[@] NOTE: Ending routine...
+[i] INFO: FINALISING ROUTINE
+[i] INFO: ROUTINE FINISHED.
+
+
