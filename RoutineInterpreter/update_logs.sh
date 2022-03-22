@@ -1,0 +1,1 @@
+sudo cp "/home/pi/Repositories/sustag/RoutineInterpreter/logs.txt" "/var/www/html/logs.txt"
