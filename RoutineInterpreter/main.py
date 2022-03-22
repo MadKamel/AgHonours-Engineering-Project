@@ -6,6 +6,7 @@ RoutineFile = open(cfg["routine"]+".routine")
 RoutineList = RoutineFile.read().split("\n")
 
 try:
+        action.InitPump(int(cfg["output_pin"]))
         for i in range(len(RoutineList)):
                 SplitCommand = RoutineList[i].split(" ")
                 if SplitCommand[0] == "#":
@@ -18,17 +19,17 @@ try:
                         if SplitCommand[0] == "NOTE":
                                 print("[@] NOTE: " + " ".join(SplitCommand[1:]))
                         elif SplitCommand[0] == "WAIT":
-                                time.sleep(int(SplitCommand[1]))
+                                time.sleep(float(SplitCommand[1]))
                         elif SplitCommand[0] == "FLOW":
                                 if SplitCommand[1] == "ON":
                                         print("[i] INFO: ATTEMPTING TO BEGIN FLOW")
-                                        if action.Flow(True):
+                                        if action.Flow(int(cfg["output_pin"]), True):
                                                 print("[i] INFO: FLOW NOW ACTIVE")
                                         else:
                                                 print("[i] WARN: FLOW COULD NOT START!")
                                 elif SplitCommand[1] == "OFF":
                                         print("[i] INFO: ATTEMPTING TO STOP FLOW")
-                                        if action.Flow(False):
+                                        if action.Flow(int(cfg["output_pin"]), False):
                                                 print("[i] INFO: FLOW NOW INACTIVE")
                                         else:
                                                 print("[i] WARN: FLOW COULD NOT STOP!")
@@ -42,3 +43,4 @@ except:
 finally:
         print("[i] INFO: FINALISING ROUTINE")
         action.Finalize()
+print("[i] INFO: ROUTINE FINISHED.")
