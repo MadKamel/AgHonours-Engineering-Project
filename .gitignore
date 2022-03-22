@@ -1,2 +1,2 @@
 *.ignore
-RoutineInterpreter/logs.txt
+/RoutineInterpreter/logs.txt
