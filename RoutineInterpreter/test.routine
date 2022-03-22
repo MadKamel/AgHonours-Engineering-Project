@@ -1,6 +1,6 @@
 # this routine ignores lines that start with '#'
 NOTE Starting routine...
-# FLOW ON
-# WAIT 1
-# FLOW OFF
+FLOW ON
+WAIT 1
+FLOW OFF
 NOTE Ending routine...

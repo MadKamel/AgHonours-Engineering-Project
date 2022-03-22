@@ -11,6 +11,7 @@ def log(message):
 	LogFile.write(message + "\n")
 
 try:
+        log("[!] INFO: ROUTINE STARTED AT " + str(time.ctime(time.time())))
         action.InitPump(int(cfg["output_pin"]))
         for i in range(len(RoutineList)):
                 SplitCommand = RoutineList[i].split(" ")
@@ -50,4 +51,5 @@ finally:
         action.Finalize()
 log("[i] INFO: ROUTINE FINISHED.\n\n")
 
+LogFile.close()
 os.system("./update_logs.sh")
