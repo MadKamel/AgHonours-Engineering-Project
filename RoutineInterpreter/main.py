@@ -1,9 +1,14 @@
-import action, time, configs
+import action, time, configs, os
 
 cfg = configs.Read("configs")
 
 RoutineFile = open(cfg["routine"]+".routine")
 RoutineList = RoutineFile.read().split("\n")
+LogFile = open("logs.txt", "a")
+
+def log(message):
+	print(message)
+	LogFile.write(message + "\n")
 
 try:
         action.InitPump(int(cfg["output_pin"]))
@@ -15,32 +20,34 @@ try:
                         continue
                 else:
                         if cfg["debug"] == "yes":
-                                print("[#] LINE: " + RoutineList[i])
+                                log("[#] LINE: " + RoutineList[i])
                         if SplitCommand[0] == "NOTE":
-                                print("[@] NOTE: " + " ".join(SplitCommand[1:]))
+                                log("[@] NOTE: " + " ".join(SplitCommand[1:]))
                         elif SplitCommand[0] == "WAIT":
                                 time.sleep(float(SplitCommand[1]))
                         elif SplitCommand[0] == "FLOW":
                                 if SplitCommand[1] == "ON":
-                                        print("[i] INFO: ATTEMPTING TO BEGIN FLOW")
+                                        log("[i] INFO: ATTEMPTING TO BEGIN FLOW")
                                         if action.Flow(int(cfg["output_pin"]), True):
-                                                print("[i] INFO: FLOW NOW ACTIVE")
+                                                log("[i] INFO: FLOW NOW ACTIVE")
                                         else:
-                                                print("[i] WARN: FLOW COULD NOT START!")
+                                                log("[i] WARN: FLOW COULD NOT START!")
                                 elif SplitCommand[1] == "OFF":
-                                        print("[i] INFO: ATTEMPTING TO STOP FLOW")
+                                        log("[i] INFO: ATTEMPTING TO STOP FLOW")
                                         if action.Flow(int(cfg["output_pin"]), False):
-                                                print("[i] INFO: FLOW NOW INACTIVE")
+                                                log("[i] INFO: FLOW NOW INACTIVE")
                                         else:
-                                                print("[i] WARN: FLOW COULD NOT STOP!")
+                                                log("[i] WARN: FLOW COULD NOT STOP!")
                                 else:
-                                        print("[i] WARN: INVALID FLOW CONTROL " + SplitCommand[1])
+                                        log("[i] WARN: INVALID FLOW CONTROL " + SplitCommand[1])
                         else:
-                                print("[!] WARN: (" + RoutineList[i] + ") NOT RECOGNISED AS COMMAND.")
+                                log("[!] WARN: (" + RoutineList[i] + ") NOT RECOGNISED AS COMMAND.")
                                 continue
 except:
-        print("[!] WARN: AN ERROR HAS OCCURRED, FINALISING SCRIPT PREMATURELY")
+        log("[!] WARN: AN ERROR HAS OCCURRED, FINALISING SCRIPT PREMATURELY")
 finally:
-        print("[i] INFO: FINALISING ROUTINE")
+        log("[i] INFO: FINALISING ROUTINE")
         action.Finalize()
-print("[i] INFO: ROUTINE FINISHED.")
+log("[i] INFO: ROUTINE FINISHED.\n\n")
+
+os.system("./update_logs.sh")
