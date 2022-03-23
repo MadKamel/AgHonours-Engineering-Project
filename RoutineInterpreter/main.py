@@ -12,7 +12,7 @@ def log(message):
 
 try:
         log("[!] INFO: ROUTINE STARTED AT " + str(time.ctime(time.time())))
-        action.InitPump(int(cfg["output_pin"]))
+        action.InitPump(int(cfg["output_pin"]), int(cfg["led_pin"]))
         for i in range(len(RoutineList)):
                 SplitCommand = RoutineList[i].split(" ")
                 if SplitCommand[0] == "#":
@@ -29,13 +29,13 @@ try:
                         elif SplitCommand[0] == "FLOW":
                                 if SplitCommand[1] == "ON":
                                         log("[i] INFO: ATTEMPTING TO BEGIN FLOW")
-                                        if action.Flow(int(cfg["output_pin"]), True):
+                                        if action.Flow(int(cfg["output_pin"]), int(cfg["led_pin"]), True):
                                                 log("[i] INFO: FLOW NOW ACTIVE")
                                         else:
                                                 log("[i] WARN: FLOW COULD NOT START!")
                                 elif SplitCommand[1] == "OFF":
                                         log("[i] INFO: ATTEMPTING TO STOP FLOW")
-                                        if action.Flow(int(cfg["output_pin"]), False):
+                                        if action.Flow(int(cfg["output_pin"]), int(cfg["led_pin"]), False):
                                                 log("[i] INFO: FLOW NOW INACTIVE")
                                         else:
                                                 log("[i] WARN: FLOW COULD NOT STOP!")
