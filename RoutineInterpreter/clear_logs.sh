@@ -1,1 +1,2 @@
-sudo rm "/var/www/html/logs.txt"
+sudo rm -f "/var/www/html/logs.txt"
+sudo cp "logs_template.txt" "logs.txt"
