@@ -1,1 +1,1 @@
-cron for clear_logs.sh
+cron for clear_logs.sh : done!
